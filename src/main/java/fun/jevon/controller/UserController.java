@@ -16,11 +16,10 @@ public class UserController {
     private UserService userService;
     @GetMapping("getUser/{uid}")
     public Response getRecord(@PathVariable("uid") String uid){
-        try {
-            UserTable user = userService.getUser(uid);
-            return Response.succes(user);
-        }catch (Exception e){
-            return Response.error(500,"无此用户");
+        UserTable user = userService.getUser(uid);
+        if(user == null){
+            return Response.error(404,"用户不存在");
         }
+            return Response.succes(user);
     }
 }
