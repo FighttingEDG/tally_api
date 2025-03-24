@@ -1,7 +1,7 @@
 package fun.jevon.controller;
 
-import fun.jevon.entity.responsemapping.RecordResponse;
-import fun.jevon.service.RecordService;
+import fun.jevon.entity.tablemapping.UserTable;
+import fun.jevon.service.UserService;
 import fun.jevon.util.response.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,20 +9,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("api/tally")
-public class RecordController {
+public class UserController {
     @Autowired
-    private RecordService recordService;
-    @GetMapping("getRecord/{id}")
-    public Response getRecord(@PathVariable("id") String id){
+    private UserService userService;
+    @GetMapping("getUser/{uid}")
+    public Response getRecord(@PathVariable("uid") String uid){
         try {
-            List<RecordResponse> recordList = recordService.getRecord(id);
-            return Response.succes(recordList);
+            UserTable user = userService.getUser(uid);
+            return Response.succes(user);
         }catch (Exception e){
-            return Response.error(500,"获取记录失败");
+            return Response.error(500,"无此用户");
         }
     }
 }

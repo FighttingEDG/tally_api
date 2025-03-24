@@ -1,6 +1,9 @@
 package fun.jevon.util.response;
 
+import lombok.Data;
+
 // Api返回类,<T>任意数据类型
+@Data
 public class Response<T> {
     // 状态码
     private int code;

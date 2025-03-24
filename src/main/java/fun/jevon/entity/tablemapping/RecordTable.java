@@ -9,12 +9,12 @@ import java.time.LocalDateTime;
 
 @Data
 @TableName("transaction_records")
-public class Record {
+public class RecordTable {
     @TableId
     private int id;
     private String name;
     private String detail;
     private BigDecimal amount;
     private LocalDateTime time;
-    private int uid;
+    private String uid;
 }
