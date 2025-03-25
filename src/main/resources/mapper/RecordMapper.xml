@@ -11,6 +11,13 @@
                amount,
                time
         from transaction_records
-        where uid = #{id}
+        where uid = #{uid}
+            <if test="month != null">
+                and MONTH(time) = #{month}
+            </if>
+            <if test="year != null">
+                and YEAR(time) = #{year}
+            </if>
+        order by time desc
     </select>
 </mapper>

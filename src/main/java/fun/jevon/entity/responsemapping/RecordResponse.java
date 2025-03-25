@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+// 查询返回映射实体类
 @Data
 public class RecordResponse {
     private int id;

@@ -43,4 +43,8 @@ cors:
 # 打印sql语句
 mybatis:
   configuration:
-    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+# 设置日志级别
+logging:
+  level:
+    fun.jevon.mapper: debug

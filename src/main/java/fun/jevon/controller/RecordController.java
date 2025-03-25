@@ -1,13 +1,11 @@
 package fun.jevon.controller;
 
 import fun.jevon.entity.responsemapping.RecordResponse;
+import fun.jevon.entity.responsemapping.SelectRecord;
 import fun.jevon.service.RecordService;
 import fun.jevon.util.response.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,10 +14,10 @@ import java.util.List;
 public class RecordController {
     @Autowired
     private RecordService recordService;
-    @GetMapping("getRecord/{id}")
-    public Response getRecord(@PathVariable("id") String id){
+    @PostMapping("getRecord")
+    public Response getRecord(@RequestBody SelectRecord selectRecord){
         try {
-            List<RecordResponse> recordList = recordService.getRecord(id);
+            List<RecordResponse> recordList = recordService.getRecord(selectRecord);
             return Response.succes(recordList);
         }catch (Exception e){
             return Response.error(500,"获取记录失败");
