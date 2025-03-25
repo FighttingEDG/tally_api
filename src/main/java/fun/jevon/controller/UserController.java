@@ -1,25 +1,37 @@
 package fun.jevon.controller;
 
 import fun.jevon.entity.tablemapping.UserTable;
+import fun.jevon.mapper.UserMapper;
 import fun.jevon.service.UserService;
 import fun.jevon.util.response.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/tally")
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserMapper userMapper;
+
     @GetMapping("getUser/{uid}")
-    public Response getRecord(@PathVariable("uid") String uid){
+    public Response getUser(@PathVariable("uid") String uid) {
         UserTable user = userService.getUser(uid);
-        if(user == null){
-            return Response.error(404,"用户不存在");
+        if (user == null) {
+            return Response.error(404, "用户不存在");
         }
-            return Response.succes(user);
+        return Response.succes(user);
+    }
+
+    // 插入用户
+    @PostMapping("insertUser")
+    public Response insertUser(@RequestBody UserTable userTable) {
+        int num = userMapper.getUserCount(userTable.getUid());
+        if (num > 0) {
+            return Response.error(409, "用户已存在");
+        }
+        userService.insertUser(userTable);
+        return Response.succes("插入成功");
     }
 }

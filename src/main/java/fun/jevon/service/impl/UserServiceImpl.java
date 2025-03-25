@@ -19,4 +19,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserTable> implemen
         UserTable userTable = userMapper.getUser(uid);
         return userTable;
     }
+
+    @Override
+    public int insertUser(UserTable userTable) {
+        int num = userMapper.insertUser(userTable);
+        return num;
+    }
 }

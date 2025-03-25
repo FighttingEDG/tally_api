@@ -3,13 +3,23 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="fun.jevon.mapper.UserMapper">
-    <!-- 查询该用户所有流水信息 -->
+    <!-- 根据uid查询用户信息-->
     <select id="getUser" resultType="fun.jevon.entity.tablemapping.UserTable">
         select id,
                nick_name,
                monthly_income,
                uid
         from users
+        where uid = #{uid}
+    </select>
+    <!--  插入用户(目前只传uid)  -->
+    <insert id="insertUser" parameterType="fun.jevon.entity.tablemapping.UserTable">
+        INSERT INTO users (nick_name, monthly_income, uid)
+        VALUES (#{nickName}, #{monthlyIncome}, #{uid})
+    </insert>
+    <!--  查询用户总数  -->
+    <select id="getUserCount" resultType="int">
+        SELECT COUNT(*) FROM users
         where uid = #{uid}
     </select>
 </mapper>
