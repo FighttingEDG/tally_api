@@ -20,6 +20,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserTable> implemen
         return userTable;
     }
 
+    // 查询用户数量
+    @Override
+    public int getUserCount(String uid) {
+        int num = userMapper.getUserCount(uid);
+        return num;
+    }
+
     @Override
     public int insertUser(UserTable userTable) {
         int num = userMapper.insertUser(userTable);

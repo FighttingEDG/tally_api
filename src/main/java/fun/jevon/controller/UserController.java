@@ -24,6 +24,16 @@ public class UserController {
         return Response.succes(user);
     }
 
+    // 查询用户是否存在
+    @GetMapping("getUserCount/{uid}")
+    public Response getUserCount(@PathVariable("uid") String uid) {
+        int count = userService.getUserCount(uid);
+        if (count > 0 && count == 1) {
+            return Response.succes("查询成功，用户存在");
+        }
+        return Response.error(404, "用户不存在");
+    }
+
     // 插入用户
     @PostMapping("insertUser")
     public Response insertUser(@RequestBody UserTable userTable) {
