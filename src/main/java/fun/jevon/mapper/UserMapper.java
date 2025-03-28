@@ -12,5 +12,7 @@ public interface UserMapper extends BaseMapper<UserTable> {
     int getUserCount(String uid);
     // 插入用户
     int insertUser(UserTable userTable);
+    // 修改用户
+    int putUser(UserTable userTable);
 
 }

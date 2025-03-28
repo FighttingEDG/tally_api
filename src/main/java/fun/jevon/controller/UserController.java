@@ -44,4 +44,16 @@ public class UserController {
         userService.insertUser(userTable);
         return Response.succes("插入成功");
     }
+
+    // 修改用户
+    @PutMapping("putUser")
+    public Response putUser(@RequestBody UserTable userTable) {
+        int num = userMapper.putUser(userTable);
+        // 只可能有一条满足
+        if(num == 1){
+            UserTable userTable1 = userService.getUser(userTable.getUid());
+            return Response.succes(userTable1);
+        }
+        return Response.error(404,"用户不存在成功");
+    }
 }

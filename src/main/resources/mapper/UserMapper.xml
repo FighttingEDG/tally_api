@@ -22,4 +22,11 @@
         SELECT COUNT(*) FROM users
         where uid = #{uid}
     </select>
+    <!--  修改用户  -->
+    <update id="putUser" parameterType="fun.jevon.entity.tablemapping.UserTable">
+        UPDATE users
+        SET nick_name = #{nickName},
+            monthly_income = #{monthlyIncome}
+        WHERE uid = #{uid}
+    </update>
 </mapper>
