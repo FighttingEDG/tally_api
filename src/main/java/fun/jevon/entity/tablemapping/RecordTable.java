@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @TableName("transaction_records")
 public class RecordTable {
     @TableId
-    private int id;
+    private Integer id;
     private String name;
     private String detail;
     private BigDecimal amount;

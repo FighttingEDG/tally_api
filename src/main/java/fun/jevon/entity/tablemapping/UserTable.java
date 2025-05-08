@@ -8,7 +8,7 @@ import lombok.Data;
 @TableName("users")
 public class UserTable {
     @TableId
-    private int id;
+    private Integer id;
     private String nickName;
     private int monthlyIncome;
     private String uid;
