@@ -16,6 +16,7 @@ mybatis-plus:
 server:
   port: 8099
 
+
 # jwt配置
 jwt:
   secret-key: JevonToken # token秘钥
