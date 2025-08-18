@@ -23,14 +23,6 @@ jwt:
   expiration: 20000  # Token过期时间（单位：毫秒）两小时（短有效期）
   refresh-expiration: 12000000 # 无感刷新时长（长有效期）
 
-# 本地文件存储路径
-file:
-  # 图片的全路径前缀
-  img-prefixUrl: http://localhost
-  upload-dir: /Users/jevons/Desktop/job2/applet-upload/tally/images
-  #  在windows中的配置
-#  upload-dir: D:/upload/images/
-
 # 跨域信息配置
 cors:
   # 允许的跨域来源

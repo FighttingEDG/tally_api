@@ -1,0 +1,43 @@
+# 连接池配置
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      url: jdbc:mysql://localhost:3306/tallybook_db
+      username: root
+      password: 1659782099PPP.
+      driver-class-name: com.mysql.cj.jdbc.Driver
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true # 自动将数据库字段下划线转为驼峰命名
+  global-config:
+    db-config:
+      id-type: auto # 自动主键生成策略
+server:
+  port: 8002
+
+
+# jwt配置
+jwt:
+  secret-key: JevonToken # token秘钥
+  expiration: 20000  # Token过期时间（单位：毫秒）两小时（短有效期）
+  refresh-expiration: 12000000 # 无感刷新时长（长有效期）
+
+# 跨域信息配置
+cors:
+  # 允许的跨域来源
+  allowedOrigins: "*"
+  # 允许的请求方法
+  allowedMethods: "*"
+  # 允许的请求头
+  allowedHeaders: "*"
+  # 是否允许携带认证信息
+  allowCredentials: true
+# 打印sql语句
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+# 设置日志级别
+logging:
+  level:
+    fun.jevon.mapper: debug
