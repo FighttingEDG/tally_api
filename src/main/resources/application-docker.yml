@@ -1,0 +1,72 @@
+# Docker环境配置
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      url: ${SPRING_DATASOURCE_URL:jdbc:mysql://mysql:3306/tallybook_db}
+      username: ${SPRING_DATASOURCE_USERNAME:root}
+      password: ${SPRING_DATASOURCE_PASSWORD:1659782099PPP.}
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      # 连接池配置
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+  
+  # Redis配置
+  data:
+    redis:
+      host: ${SPRING_REDIS_HOST:redis}
+      port: ${SPRING_REDIS_PORT:6379}
+      timeout: 2000ms
+      lettuce:
+        pool:
+          max-active: 8
+          max-wait: -1ms
+          max-idle: 8
+          min-idle: 0
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+
+server:
+  port: 8002
+
+# JWT配置
+jwt:
+  secret-key: JevonToken
+  expiration: 20000
+  refresh-expiration: 12000000
+
+# 跨域配置
+cors:
+  allowedOrigins: "*"
+  allowedMethods: "*"
+  allowedHeaders: "*"
+  allowCredentials: true
+
+# 日志配置
+logging:
+  level:
+    fun.jevon.mapper: debug
+    fun.jevon: info
+    org.springframework: warn
+    root: info
+  file:
+    name: /var/log/tally/tally-end.log
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n"

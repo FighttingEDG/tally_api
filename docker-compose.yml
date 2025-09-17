@@ -1,0 +1,61 @@
+services:
+  # MySQL服务
+  mysql:
+    image: mysql:8.0
+    container_name: tally-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 1659782099PPP.
+      MYSQL_DATABASE: tallybook_db
+      MYSQL_USER: tally_user
+      MYSQL_PASSWORD: tally_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./sql:/docker-entrypoint-initdb.d
+    networks:
+      - tally-network
+    restart: unless-stopped
+
+  # Redis服务
+  redis:
+    image: redis:7-alpine
+    container_name: tally-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - tally-network
+    restart: unless-stopped
+
+  # 应用服务
+  tally-api:
+    build: .
+    container_name: tally-api
+    ports:
+      - "8002:8002"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/tallybook_db
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=1659782099PPP.
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
+    depends_on:
+      - mysql
+      - redis
+    networks:
+      - tally-network
+    restart: unless-stopped
+    volumes:
+      - tally_logs:/var/log/tally
+
+volumes:
+  mysql_data:
+  redis_data:
+  tally_logs:
+
+networks:
+  tally-network:
+    driver: bridge
